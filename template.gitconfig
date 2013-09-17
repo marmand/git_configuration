@@ -1,0 +1,17 @@
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+[user]
+    name = @NAME@
+    email = @EMAIL@
+[core]
+    editor = @EDITOR@
+    excludesfile = @HOME@/.gitignore
+[merge]
+    tool = @MERGETOOL@
+# This exist in order to have the script correctly working.
+[alias]
+
