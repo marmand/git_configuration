@@ -12,6 +12,8 @@
     excludesfile = @HOME@/.gitignore
 [merge]
     tool = @MERGETOOL@
+[push]
+    default = current
 # This exist in order to have the script correctly working.
 [alias]
 
