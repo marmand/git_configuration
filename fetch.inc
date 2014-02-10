@@ -10,4 +10,6 @@
     frm = !"f() { git fr \"master\"; }; f"
     # Rebase on current branch
     rc = !"f() { mybranch=$(git cbr); git rebase \"origin/$mybranch\"; }; f"
+    # Fetching remote tags and branches, pruning remotly inexistant refs
+    fp = !"f() { git fetch -ap; git fetch -tp; }; f"
 
