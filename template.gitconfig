@@ -13,7 +13,7 @@
 [merge]
     tool = @MERGETOOL@
 [push]
-    default = current
+    default = simple
 # This exist in order to have the script correctly working.
 [alias]
 
