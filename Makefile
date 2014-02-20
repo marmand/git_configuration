@@ -21,8 +21,6 @@ install:
 	    sed -ie "s#@HOME@#$$HOME#" ~/.gitconfig;
 
 check:
-	mv $$HOME/.gitconfig $$HOME/.gitconfig.bak
-	mv $$HOME/.gitconfig.bak $$HOME/.gitconfig
 
 usage:
 	@echo "Usage:"
