@@ -20,6 +20,11 @@ install:
 	    sed -ie "s/@EDITOR@/$$edt/" ~/.gitconfig; 		\
 	    sed -ie "s#@HOME@#$$HOME#" ~/.gitconfig;
 
+check:
+	git submodule update
+	mv $$HOME/.gitconfig $$HOME/.gitconfig.bak
+	mv $$HOME/.gitconfig.bak $$HOME/.gitconfig
+
 usage:
 	@echo "Usage:"
 	@echo "       install    Install the current configuration"
