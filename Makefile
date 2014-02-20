@@ -21,7 +21,6 @@ install:
 	    sed -ie "s#@HOME@#$$HOME#" ~/.gitconfig;
 
 check:
-	git submodule update
 	mv $$HOME/.gitconfig $$HOME/.gitconfig.bak
 	mv $$HOME/.gitconfig.bak $$HOME/.gitconfig
 
