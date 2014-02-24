@@ -23,7 +23,9 @@ install:
 check:
 
 usage:
-	@echo "Usage:"
+	@echo "Targets:"
 	@echo "       install    Install the current configuration"
+	@echo "       test       Test the current configuration"
+	@echo "       check      Test the current configuration"
 
 # End of file.
