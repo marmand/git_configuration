@@ -20,12 +20,20 @@ install:
 	    sed -ie "s/@EDITOR@/$$edt/" ~/.gitconfig; 		\
 	    sed -ie "s#@HOME@#$$HOME#" ~/.gitconfig;
 
-check:
+test: check
+check: git
+	$(MAKE) -C t $@
+
+git:
+	$(MAKE) -C git-repo
+	ln -s git-repo/git
 
 usage:
 	@echo "Targets:"
 	@echo "       install    Install the current configuration"
 	@echo "       test       Test the current configuration"
 	@echo "       check      Test the current configuration"
+
+.PHONY: test check
 
 # End of file.

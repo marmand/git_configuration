@@ -1,0 +1,10 @@
+# vim:set ft=sh:
+
+ln_s ()
+{
+  file=$1
+  if ! test -f ../$file && ! test -d ../$file
+  then
+    ln -s git-repo/$file ../$file
+  fi
+}
