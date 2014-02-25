@@ -21,12 +21,26 @@ install:
 	    sed -ie "s#@HOME@#$$HOME#" ~/.gitconfig;
 
 test: check
-check: git
-	$(MAKE) -C t $@
+check: prepare-check
+	for f in $(CT);			\
+	do 				\
+	  $(MAKE) -C git-repo/t $$f; 	\
+	done
 
-git:
+prepare-check:
+	cd git-repo/t; git checkout Makefile
 	$(MAKE) -C git-repo
-	ln -s git-repo/git
+	cat t/Makefile.vars >> git-repo/t/Makefile
+	cat t/Makefile >> git-repo/t/Makefile
+	for f in $(CT); 		\
+	do 				\
+	  rsync t/$$f git-repo/t/$$f; 	\
+	done
+	touch prepare-check
+
+clean:
+	cd git-repo; git clean -f -x -d
+	cd git-repo; git checkout t/Makefile
 
 usage:
 	@echo "Targets:"
@@ -35,5 +49,7 @@ usage:
 	@echo "       check      Test the current configuration"
 
 .PHONY: test check
+
+include t/Makefile.vars
 
 # End of file.
