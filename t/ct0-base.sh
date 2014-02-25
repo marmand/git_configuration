@@ -1,13 +1,16 @@
 #! /bin/sh
 
-test_description='This desciptions'
+test_description='Checking that the testing framework works'
 
 # Load git test-suite utilities
 . ./test-lib.sh
 
-test_expect_success '.git/objects should be empty afted git init in an empty repo' '
-      find .git/objects -type f -print >should-be-empty &&
-      test_line_count = 0 should-be-empty
+cat > expect <<\EOF
+git version 1.9.1
+EOF
+test_expect_success 'Checking that git exists' '
+        git --version >result &&
+        test_cmp expect result
 '
 
 test_done

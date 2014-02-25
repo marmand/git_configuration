@@ -21,22 +21,18 @@ install:
 	    sed -ie "s#@HOME@#$$HOME#" ~/.gitconfig;
 
 test: check
-check: prepare-check
-	for f in $(CT);			\
-	do 				\
-	  $(MAKE) -C git-repo/t $$f; 	\
-	done
+check: prepare-check $(CT)
 
 prepare-check:
 	cd git-repo/t; git checkout Makefile
 	$(MAKE) -C git-repo
 	cat t/Makefile.vars >> git-repo/t/Makefile
 	cat t/Makefile >> git-repo/t/Makefile
-	for f in $(CT); 		\
-	do 				\
-	  rsync t/$$f git-repo/t/$$f; 	\
-	done
 	touch prepare-check
+
+$(CT):
+	rsync t/$@ git-repo/t/$@
+	$(MAKE) -C git-repo/t $@
 
 clean:
 	cd git-repo; git clean -f -x -d
@@ -48,7 +44,7 @@ usage:
 	@echo "       test       Test the current configuration"
 	@echo "       check      Test the current configuration"
 
-.PHONY: test check
+.PHONY: test check $(CT)
 
 include t/Makefile.vars
 
