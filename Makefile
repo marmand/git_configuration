@@ -32,13 +32,17 @@ prepare-check: git-repo/Makefile
 	cat t/Makefile >> git-repo/t/Makefile
 	touch prepare-check
 
-$(CT): prepare-check
+$(CT): prepare-check version-check
 	rsync t/$@ git-repo/t/$@
 	$(MAKE) -C git-repo/t $@
 
 git-repo/Makefile:
 	git submodule init
 	git submodule update
+
+version-check: git-repo/Makefile
+	test -f git-repo/GIT-VERSION-FILE || $(MAKE) -C git-repo
+	grep -c 'dirty' git-repo/GIT-VERSION-FILE && ($(MAKE) clean; $(MAKE) prepare-check)
 
 clean:
 	cd git-repo; git clean -f -x -d
