@@ -1,5 +1,7 @@
 # This file is under BSD LISCENSE.
 
+include t/Makefile.vars
+
 all: usage
 
 install:
@@ -21,7 +23,7 @@ install:
 	    sed -ie "s#@HOME@#$$HOME#" ~/.gitconfig;
 
 test: check
-check: prepare-check $(CT)
+check: $(CT)
 
 prepare-check:
 	cd git-repo/t; git checkout Makefile
@@ -30,7 +32,7 @@ prepare-check:
 	cat t/Makefile >> git-repo/t/Makefile
 	touch prepare-check
 
-$(CT):
+$(CT): prepare-check
 	rsync t/$@ git-repo/t/$@
 	$(MAKE) -C git-repo/t $@
 
@@ -45,7 +47,5 @@ usage:
 	@echo "       check      Test the current configuration"
 
 .PHONY: test check $(CT)
-
-include t/Makefile.vars
 
 # End of file.
