@@ -25,7 +25,7 @@ install:
 test: check
 check: $(CT)
 
-prepare-check:
+prepare-check: git-repo/Makefile
 	cd git-repo/t; git checkout Makefile
 	$(MAKE) -C git-repo
 	cat t/Makefile.vars >> git-repo/t/Makefile
@@ -35,6 +35,10 @@ prepare-check:
 $(CT): prepare-check
 	rsync t/$@ git-repo/t/$@
 	$(MAKE) -C git-repo/t $@
+
+git-repo/Makefile:
+	git submodule init
+	git submodule update
 
 clean:
 	cd git-repo; git clean -f -x -d
