@@ -43,6 +43,7 @@ git-repo/Makefile:
 clean:
 	cd git-repo; git clean -f -x -d
 	cd git-repo; git checkout t/Makefile
+	rm -f prepare-check
 
 usage:
 	@echo "Targets:"
