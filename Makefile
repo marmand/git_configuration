@@ -42,7 +42,7 @@ git-repo/Makefile:
 
 version-check: git-repo/Makefile
 	test -f git-repo/GIT-VERSION-FILE || $(MAKE) -C git-repo
-	grep 'dirty' git-repo/GIT-VERSION-FILE || ($(MAKE) clean; $(MAKE) prepare-check)
+	(! grep -q 'dirty' git-repo/GIT-VERSION-FILE) || ($(MAKE) clean; $(MAKE) prepare-check)
 
 clean:
 	cd git-repo; git clean -f -x -d
