@@ -45,6 +45,7 @@ version-check: git-repo/Makefile
 	(! grep -q 'dirty' git-repo/GIT-VERSION-FILE) || ($(MAKE) clean; $(MAKE) prepare-check)
 
 clean:
+	cd git-repo; rm -fr t/trash*
 	cd git-repo; git clean -f -x -d
 	cd git-repo; git checkout t/Makefile
 	rm -f prepare-check
