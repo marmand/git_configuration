@@ -1,16 +1,13 @@
 #! /bin/sh
 
-test_description='Checking that the testing framework works'
+test_description='Checking aliases'
 
 # Load git test-suite utilities
 . ./test-lib.sh
 
-cat > expect <<\EOF
-EOF
-
-test_expect_success 'Checking that git exists' '
-        git aliases >result &&
-        test_cmp expect result
+test_expect_success 'Checking that aliases alias does not exists' '
+        test_must_fail git aliases >result &&
+        test_must_be_empty result
 '
 
 test_done
