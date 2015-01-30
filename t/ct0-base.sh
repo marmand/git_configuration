@@ -6,7 +6,7 @@ test_description='Checking that the testing framework works'
 . ./test-lib.sh
 
 cat > expect <<\EOF
-git version 1.9.0
+git version 2.3.0.rc2
 EOF
 test_expect_success 'Checking that git exists' '
         git --version >result &&
