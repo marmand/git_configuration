@@ -25,7 +25,7 @@ install:
 test: check
 check: $(CT)
 
-prepare-check: git-repo/Makefile
+prepare-check: git-repo/Makefile git-repo/t/ctest-lib.sh
 	cd git-repo/t; git checkout Makefile
 	$(MAKE) -C git-repo
 	cat t/Makefile.vars >> git-repo/t/Makefile
@@ -39,6 +39,9 @@ $(CT): prepare-check version-check
 git-repo/Makefile:
 	git submodule init
 	git submodule update
+
+git-repo/t/ctest-lib.sh: t/ctest-lib.sh
+	rsync t/ctest-lib.sh git-repo/t/ctest-lib.sh
 
 version-check: git-repo/Makefile
 	test -f git-repo/GIT-VERSION-FILE || $(MAKE) -C git-repo
