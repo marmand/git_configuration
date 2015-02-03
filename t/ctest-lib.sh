@@ -9,5 +9,6 @@ EOF
   do
     cat ../../../${include}.inc >>tmp
   done &&
-  cat header tmp >>${out}
+  cat header tmp >>${out} &&
+  rm header tmp
 }

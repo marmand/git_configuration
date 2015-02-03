@@ -15,4 +15,10 @@ test_expect_success 'Setup aliases alias' '
         configurate_with alias
 '
 
+test_expect_success 'Launch alias alias' '
+      echo "usage: git alias <new alias> <original command>" >expect &&
+      test_expect_code 1 git alias 2>result &&
+      test_cmp result expect
+'
+
 test_done
