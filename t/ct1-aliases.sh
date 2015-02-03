@@ -30,4 +30,44 @@ EOF
       test_cmp result expect
 "
 
+test_expect_success setup '
+
+	echo one >one &&
+	git add one &&
+	test_tick &&
+	git commit -m initial &&
+
+	echo ichi >one &&
+	git add one &&
+	test_tick &&
+	git commit -m second &&
+
+	git mv one ichi &&
+	test_tick &&
+	git commit -m third &&
+
+	cp ichi ein &&
+	git add ein &&
+	test_tick &&
+	git commit -m fourth &&
+
+	mkdir a &&
+	echo ni >a/two &&
+	git add a/two &&
+	test_tick &&
+	git commit -m fifth  &&
+
+	git rm a/two &&
+	test_tick &&
+	git commit -m sixth
+
+'
+
+printf "sixth\nfifth\nfourth\nthird\nsecond\ninitial" > expect
+test_expect_success 'Use alias log format string' '
+      git alias lg "log --pretty=\"format:%s\"" &&
+      git lg >result &&
+      test_cmp result expect
+'
+
 test_done
