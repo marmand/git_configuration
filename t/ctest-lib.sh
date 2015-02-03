@@ -1,9 +1,13 @@
 configurate_with ()
 {
-  inc="$1"
-  out="$2"
+  inc="$@"
+  out=".git/config"
   cat >header <<-EOF &&
-    [alias]
+[alias]
 EOF
-  cat header ../../../${inc}.inc >${out}
+  for include in ${inc}
+  do
+    cat ../../../${include}.inc >>tmp
+  done &&
+  cat header tmp >>${out}
 }
