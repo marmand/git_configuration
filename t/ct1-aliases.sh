@@ -12,8 +12,8 @@ test_expect_success 'Checking that aliases alias does not exists' '
 '
 
 test_expect_success 'Setup aliases alias' '
-        echo "toto" > expect
-        toto > result
+        configurate_with alias result &&
+        echo "t" >expect &&
         test_cmp result expect
 '
 
