@@ -60,4 +60,12 @@ test_expect_success 'Test cob alias' '
         test_cmp result expect
 '
 
+printf "Checkout branch origin/titi
+Branch titi set up to track remote branch titi from origin.
+" >expect
+test_expect_success 'Test cob output' '
+        git cob titi >result &&
+        test_cmp result expect
+'
+
 test_done
