@@ -18,8 +18,9 @@ test_expect_success 'Setup fetch aliases' '
 #            \
 #             H - I - J <- tata
 
-printf "* 7961e88 J
-* 8ac8151 I
+printf "* 09c5f03 J
+* d8b7b55 I
+* 13e2fb8 H
 * be8f64f D
 * 35a8500 C
 * d9df450 B
@@ -44,6 +45,7 @@ test_expect_success 'Setup repository' '
         test_commit G &&
         git push &&
         git co tata &&
+        test_commit H &&
         test_commit I &&
         test_commit J &&
         git push &&
@@ -51,9 +53,10 @@ test_expect_success 'Setup repository' '
         test_cmp result expect
 '
 
-printf "* cbc73a5 J
-* 6ad394e I
-* 3c2692d D
+printf "* 9653d82 J
+* 30183ad I
+* 2116688 H
+* 1870fa1 D
 * f231f7a F
 * 35a8500 C
 * d9df450 B
@@ -63,8 +66,40 @@ test_expect_success 'Fetch rebase tata on master' '
         git co master &&
         git co tata &&
         git fr master &&
+        git push -f &&
         git k >result &&
         test_cmp result expect
 '
+
+# A - B - C - F <- master
+#          \   \
+#           \   D - H - I - J <- tata
+#            \
+#             D - E - G <- toto
+
+printf "* 603ce00 G
+* b48c3a3 E
+* 9653d82 J
+* 30183ad I
+* 2116688 H
+* 1870fa1 D
+* f231f7a F
+* 35a8500 C
+* d9df450 B
+* 0ddfaf1 A
+" >expect
+test_expect_success 'Fetch rebase tata on master' '
+        git co toto &&
+        git fr tata &&
+        git push -f &&
+        git k >result &&
+        test_cmp result expect
+'
+
+# A - B - C - F <- master
+#              \
+#               D - H - I - J <- tata
+#                            \
+#                             E - G <- toto
 
 test_done
