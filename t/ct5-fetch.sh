@@ -51,4 +51,20 @@ test_expect_success 'Setup repository' '
         test_cmp result expect
 '
 
+printf "* cbc73a5 J
+* 6ad394e I
+* 3c2692d D
+* f231f7a F
+* 35a8500 C
+* d9df450 B
+* 0ddfaf1 A
+" >expect
+test_expect_success 'Fetch rebase tata on master' '
+        git co master &&
+        git co tata &&
+        git fr master &&
+        git k >result &&
+        test_cmp result expect
+'
+
 test_done
