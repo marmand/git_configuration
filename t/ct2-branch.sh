@@ -25,5 +25,14 @@ test_expect_success 'List branch with simple commit' '
         test_cmp result expect
 '
 
+printf "* devel\n  master\n" >expect
+test_expect_success 'List branch with simple commit' '
+        git checkout -b devel &&
+        echo "second" >second &&
+        git add second &&
+        git commit -m "second" &&
+        git br >result &&
+        test_cmp result expect
+'
 
 test_done
