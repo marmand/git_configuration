@@ -25,7 +25,7 @@ install:
 test: check
 check: $(CT)
 
-prepare-check: git-repo/Makefile git-repo/t/ctest-lib.sh
+prepare-check: git-repo/Makefile git-repo/t/ctest-lib.sh t/Makefile.vars
 	cd git-repo/t; git checkout Makefile
 	$(MAKE) -C git-repo
 	cat t/Makefile.vars >> git-repo/t/Makefile
