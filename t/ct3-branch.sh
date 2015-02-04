@@ -58,4 +58,60 @@ test_expect_success 'Test nbr' '
         test_sha1_cmp result expect
 '
 
+printf "  devel
+  master
+* toto
+  remotes/origin/toto
+" >expect
+test_expect_success 'Test bra' '
+        git bra >result &&
+        test_cmp result expect
+'
+
+printf "toto\n" >expect
+test_expect_success 'Test cbr' '
+        git cbr >result &&
+        test_cmp result expect
+'
+
+printf "  devel
+* master
+" >expect
+test_expect_success 'Test dbr' '
+        git co master &&
+        git dbr toto &&
+        git bra >result &&
+        test_cmp result expect
+'
+
+printf "Deleting titi
+To remote.git
+ - [deleted]         titi
+Deleted branch titi (was 0e24a47).
+" >expect
+test_expect_success 'Test dbr message' '
+        git nbr titi &&
+        git co devel &&
+        git dbr titi >result 2>&1 &&
+        test_sha1_cmp result expect
+'
+
+printf "* master\n" >expect
+test_expect_success 'Test db' '
+        git co master &&
+        git db devel &&
+        git br >result &&
+        test_cmp result expect
+'
+
+printf "Deleting local titi
+Deleted branch titi (was 2b027c2).
+" >expect
+test_expect_success 'Test db message' '
+        git br titi &&
+        git co master &&
+        git db titi >result 2>&1 &&
+        test_sha1_cmp result expect
+'
+
 test_done
