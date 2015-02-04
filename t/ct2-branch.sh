@@ -16,4 +16,14 @@ test_expect_success 'List branch with nothing' '
         test_cmp result expect
 '
 
+printf "* master\n" >expect
+test_expect_success 'List branch with simple commit' '
+        echo "first" >first &&
+        git add first &&
+        git commit -m "first" &&
+        git br >result &&
+        test_cmp result expect
+'
+
+
 test_done
