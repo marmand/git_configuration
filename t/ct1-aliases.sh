@@ -70,4 +70,14 @@ test_expect_success 'Use alias log format string' '
       test_cmp result expect
 '
 
+printf "seventh\nsixth\nfifth\nfourth\nthird\nsecond\ninitial" > expect
+test_expect_success 'Use alias to create ci alias' '
+      git alias ci "commit" &&
+      echo "seven" >seven &&
+      git add seven &&
+      git ci -m seventh &&
+      git lg >result &&
+      test_cmp result expect
+'
+
 test_done
