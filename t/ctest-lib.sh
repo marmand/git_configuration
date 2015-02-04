@@ -12,3 +12,12 @@ EOF
   cat header tmp >>${out} &&
   rm header tmp
 }
+
+test_sha1_cmp ()
+{
+  lhs=$1
+  rhs=$2
+  sed -i -re 's/[0-9a-f]{7}/0000000/g' ${lhs} &&
+  sed -i -re 's/[0-9a-f]{7}/0000000/g' ${rhs} &&
+  test_cmp ${lhs} ${rhs}
+}
