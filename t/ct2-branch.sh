@@ -7,7 +7,15 @@ test_description='Checking branch aliases'
 . ./test-lib.sh
 
 test_expect_success 'Setup branch aliases' '
-        configurate_with branch
+        configurate_with branch &&
+        git init --bare remote.git &&
+        git remote add origin remote.git
+'
+
+printf "origin\tremote.git (fetch)\norigin\tremote.git (push)\n" >expect
+test_expect_success 'Check remote setting' '
+        git remote -v >result &&
+        test_cmp result expect
 '
 
 printf "" >expect
