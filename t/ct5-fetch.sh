@@ -88,7 +88,7 @@ printf "* 603ce00 G
 * d9df450 B
 * 0ddfaf1 A
 " >expect
-test_expect_success 'Fetch rebase tata on master' '
+test_expect_success 'Fetch rebase toto on tata' '
         git co toto &&
         git fr tata &&
         git push -f &&
