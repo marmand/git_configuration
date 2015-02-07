@@ -10,6 +10,12 @@ test_expect_success 'Setup branch aliases' '
         configurate_with commits log checkout branch fetch
 '
 
+printf '* 23f8942 E
+* 4013395 D
+* 35a8500 C
+* d9df450 B
+* 0ddfaf1 A
+' >expect
 test_expect_success 'Setup remote repository' '
         git init --bare remote.git &&
         git remote add origin remote.git &&
