@@ -19,6 +19,12 @@ test_expect_success 'Setup remote repository' '
         test_do_as "Auth Thor" test_commit D &&
         test_commit E &&
         git push -u origin master &&
+        test_do_in author_clone git remote add origin ../remote.git &&
+        test_do_in author_clone git fetch --all &&
+        test_do_in author_clone git checkout master &&
+        test_do_in author_clone test_do_as "Author" test_commit F &&
+        test_do_in author_clone test_do_as "Author" git push &&
+        git fetch &&
         git k >result &&
         test_cmp result expect
 '

@@ -29,6 +29,24 @@ test_do_as ()
   shift &&
   export GIT_AUTHOR_NAME &&
   test_eval_ "$@" &&
+  eval_ret=$? &&
   GIT_AUTHOR_NAME=${SAVE_GIT_AUTHOR_NAME} &&
-  export GIT_AUTHOR_NAME
+  export GIT_AUTHOR_NAME &&
+  return $eval_ret
+}
+
+test_do_in ()
+{
+  dir=$1 &&
+  shift &&
+  eval_ret= &&
+  if ! test_path_is_dir "$dir"
+  then
+    echo "Creating $dir."
+    test_create_repo "$dir"
+  fi &&
+  (
+    cd "$dir"
+    "$@"
+  )
 }
