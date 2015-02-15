@@ -31,4 +31,10 @@ test_expect_success 'Setup repository' '
         test_cmp result expect
 '
 
+printf "author wants to merge to master\n" >expect
+test_expect_success 'Checking votes branches' '
+        git pending >result 2>&1 &&
+        test_cmp result expect
+'
+
 test_done
