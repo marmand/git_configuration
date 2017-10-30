@@ -13,3 +13,8 @@
     # Fetching remote tags and branches, pruning remotly inexistant refs
     fp = !"f() { git fetch -ap; git fetch -tp; }; f"
 
+#########
+# Fetch #
+# Merge #
+#########
+    fm = !"f() { git fetch && git merge --no-ff origin/$1; }; f"
