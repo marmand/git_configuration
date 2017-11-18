@@ -15,3 +15,9 @@ Interesting things
 Look at this wonderfull project:
 
 http://pcottle.github.io/learnGitBranching/index.html?demo
+
+Contribute
+----------
+
+If you ever want to contribute to this project, you can join me on http://phabricator.leclercq.site where
+you'll gain access to my projects issue tracker/repository.
